@@ -1,0 +1,85 @@
+class FirstPWA {
+  constructor() {
+    this.speakersDiv = document.querySelector('.developers');
+    this.scheduleDiv = document.querySelector('.schedule');
+    this.init();
+  }
+
+  async init() {
+    this.loadSpeakers();
+    this.loadSchedule();
+  }
+
+  async loadSpeakers() {
+    this.speakers = await this.fetchJSON('./developers.json');
+
+    this.speakersDiv.innerHTML = this.speakers
+      .map(this.toSpeakerBlock)
+      .join('\n');
+  }
+
+  async loadSchedule() {
+    const rawSchedule = await this.fetchJSON('./schedule.json');
+
+    // Add speaker details to array
+    this.schedule = rawSchedule.map(this.addSpeakerDetails, this);
+    this.scheduleDiv.innerHTML = this.schedule
+      .map(this.toScheduleBlock)
+      .join('\n');
+  }
+
+  toSpeakerBlock(speaker) {
+    return `
+        <div class="developer">
+          <img src="${speaker.picture}" alt="${speaker.name}">
+          <div>${speaker.name}</div>
+        </div>`;
+  }
+
+  toScheduleBlock(scheduleItem) {
+    return `
+      <div class="schedule-item ${scheduleItem.category}">
+        <div class="title-and-time">
+          <div class="time">${scheduleItem.startTime}</div>
+          <div class="title-and-developer">
+            <div class="title">${scheduleItem.title}</div>
+            <div class="developer">${
+              scheduleItem.speaker ? scheduleItem.speaker.name : '&nbsp;'
+            }</div>
+          </div>
+        </div>
+        <p class="description">${scheduleItem.description}</p>
+      </div>
+    `;
+  }
+
+  addSpeakerDetails(item) {
+    if (item.speakerId) {
+      return Object.assign({}, item, {
+        speaker: this.speakers.find(s => s.id === item.speakerId)
+      });
+    }
+    return Object.assign({}, item);
+  }
+
+  async fetchJSON(url) {
+    const res = await fetch(url);
+    return res.json();
+  }
+}
+async function registerSW() { 
+  if ('serviceWorker' in navigator) { 
+    try {
+      await navigator.serviceWorker.register('./sw.js'); 
+    } catch (e) {
+      alert('ServiceWorker registration failed. Sorry about that.'); 
+    }
+  } else {
+    document.querySelector('.alert').removeAttribute('hidden'); 
+  }
+}
+
+window.addEventListener('load', e => {
+  new FirstPWA();
+  registerSW();
+});

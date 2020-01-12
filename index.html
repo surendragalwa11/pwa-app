@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>My First PWA</title>
+    <link rel="stylesheet" href="./styles.css" />
+
+    <link rel="icon" type="image/png" href="./images/icons/surendra.png" />
+
+    <meta name="theme-color" content="#92bc4d" />
+    <meta
+      name="description"
+      content="My first PWA"
+    />
+
+    <link rel="manifest" href="./manifest.json">
+
+    <!-- iOS -->
+    <link rel="apple-touch-icon" href="./images/icons/surendra_64.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-status-bar-style" content="black" />
+    <meta name="mobile-web-app-title" content="FirstPWA" />
+  </head>
+
+  <body>
+    <header><h1>First PWA</h1></header>
+
+    <nav>
+      <a href="#developers">Developers</a> <a href="#schedule">Schedule</a>
+      <a href="#code-of-conduct">Code of conduct</a>
+    </nav>
+
+    <div class="alert" role="alert" hidden>
+      Your browser does not support ServiceWorker. The app will not be available
+      offline.
+    </div>
+
+    <main>
+      <p>
+        Welcome to My first PWA! I created it on <b>12-Jan-2020</b> in Bengaluru, KA.
+      </p>
+      <p>
+        Reference article used. Learn how to build this app yourself by
+        <a href="https://vaadin.com/tutorials/learn-pwas">doing the tutorial</a
+        >.
+      </p>
+
+      <h2 id="developers">Speakers</h2>
+      <div class="developers"><div class="loader" hidden>Loading...</div></div>
+
+      <h2 id="schedule">Schedule</h2>
+
+      <p>All the presentations will be held in the main auditorium.</p>
+      <div class="schedule"><div class="loader" hidden>Loading...</div></div>
+
+      <h2 id="code-of-conduct">Code of conduct</h2>
+      <p>
+        All attendees are required to follow the
+        <a href="http://confcodeofconduct.com/">code of conduct</a>. Be nice to
+        everyone or get kicked out.
+      </p>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>

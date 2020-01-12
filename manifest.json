@@ -1,0 +1,16 @@
+{
+    "name": "First PWA",
+    "short_name": "PWA",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#92bc4d",
+    "description": "A demo app for PWA",
+    "theme_color": "#2A3443",
+    "icons": [
+      {
+        "src": "./imgages/icons/surendra_64",
+        "sizes": "64x64",
+        "type": "image/jpeg"
+      }
+    ]
+  }
